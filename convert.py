@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import tkinter as tk
+from tkinter import filedialog
 import sys
 import os
 import datetime
@@ -92,7 +94,18 @@ def convert(path):
     new_wb.save(filename=new_path)
 
 
+def select_and_convert():
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    if not os.path.exists(file_path):
+        print('请选择文件...')
+    else:
+        convert(file_path)
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('give the file path')
-    convert(sys.argv[1])
+        select_and_convert()
+    else:
+        convert(sys.argv[1])
